@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mafia Role Customizer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container my-3">
+        <!-- Language Toggle Button -->
+        <div class="d-flex justify-content-end mb-3">
+            <button id="toggleLanguage" class="btn btn-secondary">فارسی</button>
+        </div>
+
+        <h1 class="text-center mb-4" data-i18n="title">Mafia Game Role Customizer</h1>
+
+        <!-- Role Selection Form -->
+        <form id="roleForm">
+            <!-- Total Players Input -->
+            <div class="mb-3">
+                <label for="totalPlayers" data-i18n="totalPlayers">Total Players</label>
+                <input type="number" class="form-control" id="totalPlayers" min="1" value="12">
+            </div>
+
+            <!-- Total Selected Roles Display -->
+            <div class="mb-3">
+                <label data-i18n="totalSelectedRoles">Total Selected Roles: <span id="totalSelected">0</span></label>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="text-danger mb-3 d-none"></div>
+
+            <!-- Mafia Roles -->
+            <div class="mb-4">
+                <h3 data-i18n="mafiaRoles">Mafia Roles</h3>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="godfather" id="godfather" checked>
+                    <label class="form-check-label" for="godfather" data-i18n="godfather">Godfather</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="saulGoodman" id="saulGoodman" checked>
+                    <label class="form-check-label" for="saulGoodman" data-i18n="saulGoodman">Saul Goodman</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="matador" id="matador" checked>
+                    <label class="form-check-label" for="matador" data-i18n="matador">Matador</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="spy" id="spy" checked>
+                    <label class="form-check-label" for="spy" data-i18n="spy">Spy</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="drLecter" id="drLecter">
+                    <label class="form-check-label" for="drLecter" data-i18n="drLecter">Dr. Lecter</label>
+                </div>
+                <div class="form-group">
+                    <label for="simpleMafia" data-i18n="simpleMafia">Simple Mafia</label>
+                    <input type="number" class="form-control" id="simpleMafia" min="0" value="0">
+                </div>
+            </div>
+
+            <!-- Independent Roles -->
+            <div class="mb-4">
+                <h3 data-i18n="independentRoles">Independent Roles</h3>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="zodiac" id="zodiac">
+                    <label class="form-check-label" for="zodiac" data-i18n="zodiac">Zodiac</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="sherlock" id="sherlock">
+                    <label class="form-check-label" for="sherlock" data-i18n="sherlock">Sherlock</label>
+                </div>
+            </div>
+
+            <!-- Civilian Roles -->
+            <div class="mb-4">
+                <h3 data-i18n="civilianRoles">Civilian Roles</h3>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="drWatson" id="drWatson" checked>
+                    <label class="form-check-label" for="drWatson" data-i18n="drWatson">Dr. Watson</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="leon" id="leon" checked>
+                    <label class="form-check-label" for="leon" data-i18n="leon">Leon - Professional</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="detective" id="detective" checked>
+                    <label class="form-check-label" for="detective" data-i18n="detective">Detective</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="constantine" id="constantine" checked>
+                    <label class="form-check-label" for="constantine" data-i18n="constantine">Constantine</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="ocean" id="ocean" checked>
+                    <label class="form-check-label" for="ocean" data-i18n="ocean">Ocean</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="bodyguard" id="bodyguard">
+                    <label class="form-check-label" for="bodyguard" data-i18n="bodyguard">Bodyguard</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="gunslinger" id="gunslinger">
+                    <label class="form-check-label" for="gunslinger" data-i18n="gunslinger">Gunslinger</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="citizenCain" id="citizenCain">
+                    <label class="form-check-label" for="citizenCain" data-i18n="citizenCain">Citizen Cain - Sacrifice</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="mayor" id="mayor">
+                    <label class="form-check-label" for="mayor" data-i18n="mayor">Mayor</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="governor" id="governor">
+                    <label class="form-check-label" for="governor" data-i18n="governor">Governor</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="blacksmith" id="blacksmith">
+                    <label class="form-check-label" for="blacksmith" data-i18n="blacksmith">Blacksmith</label>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="simpleCitizen" data-i18n="simpleCitizen">Simple Citizen</label>
+                    <input type="number" class="form-control" id="simpleCitizen" min="0" value="3">
+                </div>
+            </div>
+
+            <button type="button" id="startGame" class="btn btn-primary btn-block w-100" data-i18n="startGame">Start Game</button>
+        </form>
+
+        <!-- Role Reveal Section -->
+        <div id="roleRevealSection" class="mt-5 d-none">
+            <h3 class="text-center" data-i18n="clickToReveal">Click to Reveal Role</h3>
+            <button id="revealRoleButton" class="btn btn-warning w-100" data-i18n="revealRole">Reveal Role</button>
+            <div id="revealedRole" class="text-center mt-3"></div>
+            <button id="gotItButton" class="btn btn-success mt-3 w-100 d-none" data-i18n="gotIt">OK, got it!</button>
+        </div>
+
+        <!-- GOD Section -->
+        <div id="godSection" class="mt-5 d-none">
+            <h3 class="text-center" data-i18n="godView">GOD View: All Roles</h3>
+            <ul id="allRolesList" class="list-group p-0"></ul>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>

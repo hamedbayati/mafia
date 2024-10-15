@@ -1,0 +1,49 @@
+/* Import Iran Sans Font */
+@import url('https://cdn.fontcdn.ir/iransans/v9/stylesheet.css');
+@import url(./fonts/fontiran.css);
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+}
+
+body[data-lang="fa"] {
+  font-family: 'IranSans', Arial, sans-serif;
+}
+
+h1, h3 {
+  color: #343a40;
+}
+
+.form-check-label {
+  margin-left: 0.5rem;
+}
+
+.form-group label {
+  margin-top: 15px;
+  display: block;
+}
+
+#startGame, #revealRoleButton, #gotItButton, #toggleLanguage, #godButton {
+  font-size: 18px;
+}
+
+#revealedRole {
+  font-size: 72px;
+  font-weight: bold;
+  color: #dc3545;
+  margin-top: 20px;
+}
+
+#allRolesList {
+  font-size: 18px;
+}
+
+#toggleLanguage {
+  font-size: 16px;
+}
+
+/* GOD Button */
+#godSection button {
+  margin-top: 20px;
+}
