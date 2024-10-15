@@ -5,6 +5,9 @@
 body {
   font-family: 'Mikhak', sans-serif;
   background-color: #f8f9fa;
+}
+
+.container {
   max-width: 400px;
 }
 
