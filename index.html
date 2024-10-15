@@ -1,39 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mafia Role Customizer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" id="bootstrap-ltr" disabled>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous" id="bootstrap-rtl">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container my-3">
+    <div class="container mt-3 mb-5">
         <!-- Language Toggle Button -->
-        <div class="d-flex justify-content-end mb-3">
-            <button id="toggleLanguage" class="btn btn-secondary">فارسی</button>
+        <div class="d-flex justify-content-end mb-1">
+            <button id="toggleLanguage" class="btn btn-outline-secondary btn-sm">فارسی</button>
         </div>
 
-        <h1 class="text-center mb-4" data-i18n="title">Mafia Game Role Customizer</h1>
-
-        <!-- Role Selection Form -->
         <form id="roleForm">
-            <!-- Total Players Input -->
-            <div class="mb-3">
-                <label for="totalPlayers" data-i18n="totalPlayers">Total Players</label>
-                <input type="number" class="form-control" id="totalPlayers" min="1" value="12">
-            </div>
-
-            <!-- Total Selected Roles Display -->
-            <div class="mb-3">
-                <label data-i18n="totalSelectedRoles">Total Selected Roles: <span id="totalSelected">0</span></label>
-            </div>
-
-            <!-- Error Message -->
-            <div id="errorMessage" class="text-danger mb-3 d-none"></div>
-
             <!-- Mafia Roles -->
             <div class="mb-4">
                 <h3 data-i18n="mafiaRoles">Mafia Roles</h3>
@@ -56,10 +39,14 @@
                 <div class="form-check">
                     <input class="form-check-input role-checkbox" type="checkbox" value="drLecter" id="drLecter">
                     <label class="form-check-label" for="drLecter" data-i18n="drLecter">Dr. Lecter</label>
-                </div>
-                <div class="form-group">
-                    <label for="simpleMafia" data-i18n="simpleMafia">Simple Mafia</label>
-                    <input type="number" class="form-control" id="simpleMafia" min="0" value="0">
+                </div>                                    
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="simpleMafia" data-i18n="simpleMafia" class="m-0">Simple Mafia</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="number" class="form-control" id="simpleMafia" min="0" value="0">
+                    </div>
                 </div>
             </div>
 
@@ -123,11 +110,20 @@
                     <input class="form-check-input role-checkbox" type="checkbox" value="blacksmith" id="blacksmith">
                     <label class="form-check-label" for="blacksmith" data-i18n="blacksmith">Blacksmith</label>
                 </div>
-                <div class="form-group mt-3">
-                    <label for="simpleCitizen" data-i18n="simpleCitizen">Simple Citizen</label>
-                    <input type="number" class="form-control" id="simpleCitizen" min="0" value="3">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="simpleCitizen" data-i18n="simpleCitizen" class="m-0">Simple Citizen</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="number" class="form-control" id="simpleCitizen" min="0" value="3">
+                    </div>
                 </div>
             </div>
+
+            <div class="mb-3 mt-3">
+                <label data-i18n="totalPlayers">Total Players:</label><span class="px-3" id="totalSelected">12</span>
+            </div>
+
 
             <button type="button" id="startGame" class="btn btn-primary btn-block w-100" data-i18n="startGame">Start Game</button>
         </form>
@@ -135,9 +131,9 @@
         <!-- Role Reveal Section -->
         <div id="roleRevealSection" class="mt-5 d-none">
             <h3 class="text-center" data-i18n="clickToReveal">Click to Reveal Role</h3>
-            <button id="revealRoleButton" class="btn btn-warning w-100" data-i18n="revealRole">Reveal Role</button>
+            <button id="revealRoleButton" class="btn btn-warning btn-lg w-100" data-i18n="revealRole">Reveal Role</button>
             <div id="revealedRole" class="text-center mt-3"></div>
-            <button id="gotItButton" class="btn btn-success mt-3 w-100 d-none" data-i18n="gotIt">OK, got it!</button>
+            <button id="gotItButton" class="btn btn-success btn-lg mt-3 w-100 d-none" data-i18n="gotIt">OK, got it!</button>
         </div>
 
         <!-- GOD Section -->

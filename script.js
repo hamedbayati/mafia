@@ -5,22 +5,19 @@ document.addEventListener("DOMContentLoaded", function() {
     const revealRoleButton = document.getElementById("revealRoleButton");
     const revealedRole = document.getElementById("revealedRole");
     const gotItButton = document.getElementById("gotItButton");
-    const errorMessage = document.getElementById("errorMessage");
     const toggleLanguageButton = document.getElementById("toggleLanguage");
     const godSection = document.getElementById("godSection");
     const allRolesList = document.getElementById("allRolesList");
     const totalSelectedSpan = document.getElementById("totalSelected");
 
     let roles = [];
-    let totalPlayers = 0;
     let currentPlayer = 0;
     let selectedRoles = [];
-    let currentLanguage = 'en';
+    let currentLanguage = 'fa';
 
     // Localization Dictionaries
     const translations = {
         en: {
-            title: "Mafia Game Role Customizer",
             mafiaRoles: "Mafia Roles",
             godfather: "Godfather",
             saulGoodman: "Saul Goodman",
@@ -33,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             sherlock: "Sherlock",
             civilianRoles: "Civilian Roles",
             drWatson: "Dr. Watson",
-            leon: "Leon - Professional",
+            leon: "Leon",
             detective: "Detective",
             constantine: "Constantine",
             ocean: "Ocean",
@@ -49,15 +46,13 @@ document.addEventListener("DOMContentLoaded", function() {
             gotIt: "I got it",
             startGame: "Start Game",
             totalPlayers: "Total Players",
-            totalSelectedRoles: "Total Selected Roles",
             godView: "GOD View: Show All Roles",
-            fa: "فارسی",
-            enLabel: "English",
+            fa: "فا",
+            enLabel: "EN",
             errorMismatch: "The total selected roles do not match the total number of players.",
             errorNoRoles: "Please select roles for at least one player."
         },
         fa: {
-            title: "سفارشی‌سازی نقش‌های بازی مافیا",
             mafiaRoles: "نقش‌های مافیا",
             godfather: "پدرخوانده",
             saulGoodman: "سال‌گودمن",
@@ -70,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
             sherlock: "شرلوک",
             civilianRoles: "نقش‌های شهروند",
             drWatson: "دکتر واتسن",
-            leon: "لئون - حرفه‌ای",
+            leon: "حرفه‌ای",
             detective: "کاراگاه",
             constantine: "کنستانتین",
             ocean: "اوشن",
@@ -86,10 +81,9 @@ document.addEventListener("DOMContentLoaded", function() {
             gotIt: "متوجه شدم!",
             startGame: "شروع بازی",
             totalPlayers: "تعداد بازیکنان",
-            totalSelectedRoles: "تعداد نقش‌های انتخاب‌شده",
             godView: "نمایش تمامی نقش‌ها",
-            fa: "فارسی",
-            enLabel: "English",
+            fa: "فا",
+            enLabel: "EN",
             errorMismatch: "تعداد نقش‌های انتخاب‌شده با تعداد بازیکنان مطابقت ندارد.",
             errorNoRoles: "لطفاً نقش‌ها را برای حداقل یک بازیکن انتخاب کنید."
         }
@@ -108,7 +102,9 @@ document.addEventListener("DOMContentLoaded", function() {
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
         document.body.setAttribute('data-lang', lang);
-        
+        document.getElementById('bootstrap-ltr').disabled = lang === 'fa';
+        document.getElementById('bootstrap-rtl').disabled = lang === 'en';
+
         // Update text based on translations
         document.querySelectorAll('[data-i18n]').forEach(function(element) {
             const key = element.getAttribute('data-i18n');
@@ -151,21 +147,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     startGameButton.addEventListener("click", function() {
-        const totalPlayersInput = parseInt(document.getElementById("totalPlayers").value);
-        if (isNaN(totalPlayersInput) || totalPlayersInput < 1) {
-            showError(translations[currentLanguage]['errorNoRoles']);
-            return;
-        }
-
         roles = getRoles();
-        totalPlayers = totalPlayersInput;
-
-        const sumRoles = roles.length;
-
-        if (sumRoles !== totalPlayers) {
-            showError(translations[currentLanguage]['errorMismatch']);
-            return;
-        }
 
         shuffle(roles);
         selectedRoles = [...roles];
@@ -271,14 +253,6 @@ document.addEventListener("DOMContentLoaded", function() {
             [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
-    }
-
-    function showError(message) {
-        errorMessage.textContent = message;
-        errorMessage.classList.remove("d-none");
-        setTimeout(() => {
-            errorMessage.classList.add("d-none");
-        }, 3000);
     }
 
     function getTranslation(key) {

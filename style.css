@@ -1,14 +1,11 @@
-/* Import Iran Sans Font */
-@import url('https://cdn.fontcdn.ir/iransans/v9/stylesheet.css');
-@import url(./fonts/fontiran.css);
+@import url('https://v1.fontapi.ir/css/Mikhak');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Mikhak', sans-serif;
   background-color: #f8f9fa;
-}
-
-body[data-lang="fa"] {
-  font-family: 'IranSans', Arial, sans-serif;
+  max-width: 400px;
 }
 
 h1, h3 {
@@ -24,8 +21,13 @@ h1, h3 {
   display: block;
 }
 
+#simpleMafia,
+#simpleCitizen {
+  width: 80px;
+}
+
 #startGame, #revealRoleButton, #gotItButton, #toggleLanguage, #godButton {
-  font-size: 18px;
+  font-size: 38px;
 }
 
 #revealedRole {
@@ -40,7 +42,7 @@ h1, h3 {
 }
 
 #toggleLanguage {
-  font-size: 16px;
+  font-size: 12px;
 }
 
 /* GOD Button */
