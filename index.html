@@ -190,8 +190,26 @@
 
         <!-- GOD Section -->
         <div id="godSection" class="d-none">
-            <h3 class="text-center" data-i18n="allRevealedRoles">GOD View: All Roles</h3>
-            <ul id="allRolesList" class="list-group p-0"></ul>
+            <div id="godMainSection" class="mt-5 d-none">
+                <button id="allRolesListButton" class="btn btn-info btn-lg w-100 mb-4" data-i18n="allRevealedRoles">All Revealed Roles</button>
+                <button id="finalMoveButton" class="btn btn-info btn-lg w-100" data-i18n="finalMove">Final Move</button>
+            </div>
+            <div id="godRolesSection" class="mt-5 d-none">
+                <div class="d-flex justify-content-between">
+                    <h3 class="text-start" data-i18n="allRevealedRoles">All Revealed Roles</h3>
+                    <button id="godRolesSectionCloseButton" class="btn btn-outline-danger btn-sm" data-i18n="closeButton">Close</button>
+                </div>
+                <ul id="allRolesList" class="list-group"></ul>
+            </div>
+            <div id="godFinalMoveSection" class="mt-5 d-none">
+                <div class="d-flex justify-content-between">
+                    <h3 class="text-start" data-i18n="finalMove">Final Move</h3>
+                    <button id="godFinalMoveSectionCloseButton" class="btn btn-outline-danger btn-sm" data-i18n="closeButton">Close</button>
+                </div>
+                <button id="revealFinalMoveButton" class="btn btn-warning btn-lg w-100 mt-3" data-i18n="revealFinalMove">Reveal Final Move</button>
+                <img id="revealedFinalMove" src="img/startup.jpg" class="img-thumbnail mt-3" alt="DMV MAFIA">
+            </div>
+
         </div>
     </div>
 

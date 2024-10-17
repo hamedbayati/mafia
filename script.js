@@ -8,12 +8,23 @@ document.addEventListener("DOMContentLoaded", function() {
     const gotItButton = document.getElementById("gotItButton");
     const godButton = document.getElementById("godButton");
     const godSection = document.getElementById("godSection");
+    const godMainSection = document.getElementById("godMainSection");
+    const allRolesListButton = document.getElementById("allRolesListButton");
+    const finalMoveButton = document.getElementById("finalMoveButton");
+    const godRolesSection = document.getElementById("godRolesSection");
+    const godRolesSectionCloseButton = document.getElementById("godRolesSectionCloseButton");
+    const godFinalMoveSection = document.getElementById("godFinalMoveSection");
     const allRolesList = document.getElementById("allRolesList");
     const totalSelectedSpan = document.getElementById("totalSelected");
+    const revealFinalMoveButton = document.getElementById("revealFinalMoveButton");
+    const revealedFinalMove = document.getElementById("revealedFinalMove");
 
-    let roles = [];
     let currentPlayer = 0;
-    let selectedRoles = [];
+    let shuffledRoles = [];
+
+    let currentBenchedPlayer = 0;
+    let shuffledFinalMoves = [];
+
     let currentLanguage = 'fa';
 
     // Localization Dictionaries
@@ -60,7 +71,10 @@ document.addEventListener("DOMContentLoaded", function() {
             faceOff: "Face Off",
             handcuffs: "Handcuffs",
             silenceOfTheLambs: "Silence of the Lambs",
-            greenMile: "The Green Mile"
+            greenMile: "The Green Mile",
+            finalMove: "Final Move",
+            closeButton: "Close",
+            revealFinalMove: "Reveal Final Move"
         },
         fa: {
             mafiaRoles: "نقش‌های مافیا",
@@ -93,10 +107,10 @@ document.addEventListener("DOMContentLoaded", function() {
             startGame: "شروع بازی",
             totalPlayers: "تعداد بازیکنان:",
             godView: "نمایش نتیجه برای استاد بهار",
-            allRevealedRoles: 'نقش‌ها به ترتیب',
+            allRevealedRoles: 'نقش‌ها',
             faLabel: "فا",
             enLabel: "EN",
-            finalMoves: "حرکات نهایی",
+            finalMoves: "کارت‌های خروج",
             beautifulMind: "ذهن زیبا",
             finalShot: "شلیک نهایی",
             roleReveal: "افشای نقش",
@@ -104,7 +118,10 @@ document.addEventListener("DOMContentLoaded", function() {
             faceOff: "تغییر چهره",
             handcuffs: "دستبند",
             silenceOfTheLambs: "سکوت بره‌ها",
-            greenMile: "مسیر سبز"
+            greenMile: "مسیر سبز",
+            finalMove: "کارت‌ خروج",
+            closeButton: "بستن",
+            revealFinalMove: "نمایش کارت خروج"
         }
     };
 
@@ -162,54 +179,6 @@ document.addEventListener("DOMContentLoaded", function() {
         totalSelectedSpan.textContent = total;
     }
 
-    startGameButton.addEventListener("click", function() {
-        roles = getRoles();
-
-        shuffle(roles);
-        selectedRoles = [...roles];
-        currentPlayer = 0;
-        roleForm.classList.add("d-none");
-        roleRevealSection.classList.remove("d-none");
-        godSection.classList.add("d-none");
-        revealedRole.src = "img/startup.jpg";
-        gotItButton.classList.add("d-none");
-    });
-
-    revealRoleButton.addEventListener("click", function() {
-        if (currentPlayer < selectedRoles.length) {
-            const role = selectedRoles[currentPlayer];
-            console.log(role.key, role.name);
-            revealedRole.src = `img/roleCards/${role.key}.jpg`;
-            revealRoleButton.classList.add("d-none");
-            gotItButton.classList.remove("d-none");
-            currentPlayer++;
-        }
-    });
-
-    gotItButton.addEventListener("click", function() {
-        revealedRole.src = "img/startup.jpg"
-        gotItButton.classList.add("d-none");
-        
-        if (currentPlayer === selectedRoles.length) {
-            godButton.classList.remove("d-none");
-        } else {
-            revealRoleButton.classList.remove("d-none");
-        }
-    });
-
-    godButton.addEventListener("click", function() {
-        godSection.classList.remove("d-none");
-        roleRevealSection.classList.add("d-none");
-
-        allRolesList.innerHTML = "";
-        selectedRoles.forEach((role, index) => {
-            const listItem = document.createElement("li");
-            listItem.className = "list-group-item";
-            listItem.textContent = `${index + 1}. ${role.name}`;
-            allRolesList.appendChild(listItem);
-        });
-    });
-
     function getRoles() {
         const mafiaRoles = [
             { key: "godfather", count: document.getElementById("godfather").checked ? 1 : 0 },
@@ -241,19 +210,38 @@ document.addEventListener("DOMContentLoaded", function() {
         ];
 
         const expandedRoles = [
-            ...expandRoles(mafiaRoles),
-            ...expandRoles(independentRoles),
-            ...expandRoles(civilianRoles)
+            ...expand(mafiaRoles),
+            ...expand(independentRoles),
+            ...expand(civilianRoles)
         ];
 
         return expandedRoles.map(roleKey => ({
             key: roleKey,
             name: getTranslation(roleKey)
         }));
-    
     }
 
-    function expandRoles(roles) {
+    function getFinalMoves() {
+        const finalMoves = [
+            { key: "beautifulMind", count: document.getElementById("beautifulMind").checked ? 1 : 0 },
+            { key: "finalShot", count: document.getElementById("finalShot").checked ? 1 : 0 },
+            { key: "roleReveal", count: document.getElementById("roleReveal").checked ? 1 : 0 },
+            { key: "sideReveal", count: document.getElementById("sideReveal").checked ? 1 : 0 },
+            { key: "faceOff", count: document.getElementById("faceOff").checked ? 1 : 0 },
+            { key: "handcuffs", count: document.getElementById("handcuffs").checked ? 1 : 0 },
+            { key: "silenceOfTheLambs", count: document.getElementById("silenceOfTheLambs").checked ? 1 : 0 },
+            { key: "greenMile", count: document.getElementById("greenMile").checked ? 1 : 0 }
+        ];
+
+        const expandedFinalMoves = expand(finalMoves);
+
+        return expandedFinalMoves.map(moveKey => ({
+            key: moveKey,
+            name: getTranslation(moveKey)
+        }));
+    }
+
+    function expand(roles) {
         let expanded = [];
         roles.forEach(({ key, count }) => {
             for (let i = 0; i < count; i++) {
@@ -274,4 +262,86 @@ document.addEventListener("DOMContentLoaded", function() {
     function getTranslation(key) {
         return translations[currentLanguage][key] || key;
     }
+
+    // Event listeners for buttons
+    startGameButton.addEventListener("click", function() {
+        shuffledRoles = shuffle(getRoles());
+        shuffledFinalMoves = shuffle(getFinalMoves());
+
+        currentPlayer = 0;
+        currentBenchedPlayer = 0;
+
+        roleForm.classList.add("d-none");
+        roleRevealSection.classList.remove("d-none");
+        godSection.classList.add("d-none");
+        revealedRole.src = "img/startup.jpg";
+        gotItButton.classList.add("d-none");
+    });
+
+    revealRoleButton.addEventListener("click", function() {
+        if (currentPlayer < shuffledRoles.length) {
+            const role = shuffledRoles[currentPlayer];
+            console.log(role.key, role.name);
+            revealedRole.src = `img/roleCards/${role.key}.jpg`;
+            revealRoleButton.classList.add("d-none");
+            gotItButton.classList.remove("d-none");
+            currentPlayer++;
+        }
+    });
+
+    gotItButton.addEventListener("click", function() {
+        revealedRole.src = "img/startup.jpg"
+        gotItButton.classList.add("d-none");
+        
+        if (currentPlayer === shuffledRoles.length) {
+            godButton.classList.remove("d-none");
+        } else {
+            revealRoleButton.classList.remove("d-none");
+        }
+    });
+
+    godButton.addEventListener("click", function() {
+        allRolesList.innerHTML = "";
+        shuffledRoles.forEach((role, index) => {
+            const listItem = document.createElement("li");
+            listItem.className = "list-group-item";
+            listItem.textContent = `${index + 1}. ${role.name}`;
+            allRolesList.appendChild(listItem);
+        });
+        roleRevealSection.classList.add("d-none");
+        godSection.classList.remove("d-none");
+        godMainSection.classList.remove("d-none");
+    });
+
+    allRolesListButton.addEventListener("click", function() {
+        godMainSection.classList.add("d-none");
+        godRolesSection.classList.remove("d-none");
+    });
+
+    godRolesSectionCloseButton.addEventListener("click", function() {
+        godRolesSection.classList.add("d-none");
+        godMainSection.classList.remove("d-none");
+    });
+
+    finalMoveButton.addEventListener("click", function() {
+        godMainSection.classList.add("d-none");
+        godFinalMoveSection.classList.remove("d-none");
+        revealedFinalMove.src = "img/startup.jpg";
+        revealFinalMoveButton.classList.remove("d-none");
+    });
+
+    godFinalMoveSectionCloseButton.addEventListener("click", function() {
+        godFinalMoveSection.classList.add("d-none");
+        godMainSection.classList.remove("d-none");
+    });
+
+    revealFinalMoveButton.addEventListener("click", function() {
+        if (currentBenchedPlayer < shuffledFinalMoves.length) {
+            const finalMove = shuffledFinalMoves[currentBenchedPlayer];
+            revealedFinalMove.src = `img/finalMoveCards/${finalMove.key}.jpg`;
+            revealFinalMoveButton.classList.add("d-none");
+            gotItButton.classList.remove("d-none");
+            currentBenchedPlayer++;
+        }
+    });
 });

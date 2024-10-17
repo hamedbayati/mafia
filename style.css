@@ -32,7 +32,7 @@ h1, h3 {
   width: 40px;
 }
 
-#startGame, #revealRoleButton, #gotItButton, #toggleLanguage {
+#startGame, #revealRoleButton, #gotItButton, #toggleLanguage, #allRolesListButton, #finalMoveButton {
   font-size: 38px;
 }
 
@@ -40,7 +40,8 @@ h1, h3 {
   font-size: 28px;
 }
 
-#revealedRole {
+#revealedRole,
+#revealedFinalMove {
   font-size: 72px;
   font-weight: bold;
   background-color: black;
@@ -55,7 +56,7 @@ h1, h3 {
   font-size: 12px;
 }
 
-/* GOD Button */
-#godSection button {
-  margin-top: 20px;
+#godRolesSectionCloseButton,
+#godFinalMoveSectionCloseButton {
+  height: 30px;
 }
