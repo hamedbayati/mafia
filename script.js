@@ -50,7 +50,16 @@ document.addEventListener("DOMContentLoaded", function() {
             totalPlayers: "Total Players:",
             godView: "GOD View: Show All Roles",
             faLabel: "فا",
-            enLabel: "EN"
+            enLabel: "EN",
+            finalMoves: "Final Moves",
+            beautifulMind: "Beautiful Mind",
+            finalShot: "Final Shot",
+            roleReveal: "Role Reveal",
+            sideReveal: "Side Reveal",
+            faceOff: "Face Off",
+            handcuffs: "Handcuffs",
+            silenceOfTheLambs: "Silence of the Lambs",
+            greenMile: "The Green Mile"
         },
         fa: {
             mafiaRoles: "نقش‌های مافیا",
@@ -85,7 +94,16 @@ document.addEventListener("DOMContentLoaded", function() {
             totalPlayers: "تعداد بازیکنان:",
             godView: "نمایش تمامی نقش‌ها",
             faLabel: "فا",
-            enLabel: "EN"
+            enLabel: "EN",
+            finalMoves: "حرکات نهایی",
+            beautifulMind: "ذهن زیبا",
+            finalShot: "شلیک نهایی",
+            roleReveal: "افشای نقش",
+            sideReveal: "افشای ساید",
+            faceOff: "تغییر چهره",
+            handcuffs: "دستبند",
+            silenceOfTheLambs: "سکوت بره‌ها",
+            greenMile: "مسیر سبز"
         }
     };
 

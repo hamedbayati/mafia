@@ -14,6 +14,10 @@ body {
 h1, h3 {
   color: #343a40;
 }
+.form-check {
+  padding-right: calc(var(--bs-gutter-x) * 1.5);
+  padding-left: calc(var(--bs-gutter-x) * 1.5);
+}
 
 .form-check-label {
   margin-left: 0.5rem;
@@ -25,7 +29,7 @@ h1, h3 {
 }
 
 #simpleCitizen {
-  width: 50px;
+  width: 40px;
 }
 
 #startGame, #revealRoleButton, #gotItButton, #toggleLanguage, #godButton {
