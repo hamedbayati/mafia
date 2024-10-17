@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
             independentRoles: "Independent Roles",
             zodiac: "Zodiac",
             sherlock: "Sherlock",
+            nostradamus: "Nostradamus",
+            jackSparrow: "Jack Sparrow",
             civilianRoles: "Civilian Roles",
             drWatson: "Dr. Watson",
             leon: "Leon",
@@ -39,18 +41,16 @@ document.addEventListener("DOMContentLoaded", function() {
             mayor: "Mayor",
             governor: "Governor",
             blacksmith: "Blacksmith",
-            citizenCain: "Citizen Cain - Sacrifice",
+            citizenCain: "Citizen Cain",
             simpleCitizen: "Simple Citizen",
             clickToReveal: "Click to Reveal Role",
             revealRole: "Reveal Role",
-            gotIt: "I got it",
+            gotIt: "Ok, got it!",
             startGame: "Start Game",
             totalPlayers: "Total Players",
             godView: "GOD View: Show All Roles",
-            fa: "فا",
-            enLabel: "EN",
-            errorMismatch: "The total selected roles do not match the total number of players.",
-            errorNoRoles: "Please select roles for at least one player."
+            faLabel: "فا",
+            enLabel: "EN"
         },
         fa: {
             mafiaRoles: "نقش‌های مافیا",
@@ -63,6 +63,8 @@ document.addEventListener("DOMContentLoaded", function() {
             independentRoles: "نقش‌های مستقل",
             zodiac: "زودیاک",
             sherlock: "شرلوک",
+            nostradamus: "نوستراداموس",
+            jackSparrow: "جک گنجشکه",
             civilianRoles: "نقش‌های شهروند",
             drWatson: "دکتر واتسن",
             leon: "حرفه‌ای",
@@ -74,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
             mayor: "شهردار",
             governor: "فرماندار",
             blacksmith: "آهنگر",
-            citizenCain: "شهروند کین - فدائی",
+            citizenCain: "شهروند کین",
             simpleCitizen: "شهروند ساده",
             clickToReveal: "برای نمایش نقش کلیک کنید",
             revealRole: "نمایش نقش",
@@ -82,10 +84,8 @@ document.addEventListener("DOMContentLoaded", function() {
             startGame: "شروع بازی",
             totalPlayers: "تعداد بازیکنان",
             godView: "نمایش تمامی نقش‌ها",
-            fa: "فا",
-            enLabel: "EN",
-            errorMismatch: "تعداد نقش‌های انتخاب‌شده با تعداد بازیکنان مطابقت ندارد.",
-            errorNoRoles: "لطفاً نقش‌ها را برای حداقل یک بازیکن انتخاب کنید."
+            faLabel: "فا",
+            enLabel: "EN"
         }
     };
 
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         // Update language toggle button text
-        toggleLanguageButton.textContent = lang === 'en' ? translations['fa']['fa'] : translations['en']['enLabel'];
+        toggleLanguageButton.textContent = lang === 'en' ? translations['fa']['faLabel'] : translations['en']['enLabel'];
     }
 
     // Event listeners for role selection to update total selected
