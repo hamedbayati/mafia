@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function() {
             blacksmith: "Blacksmith",
             citizenCain: "Citizen Cain",
             simpleCitizen: "Simple Citizen",
-            clickToReveal: "Click to Reveal Role",
             revealRole: "Reveal Role",
             gotIt: "Ok, got it!",
             startGame: "Start Game",
@@ -87,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function() {
             blacksmith: "آهنگر",
             citizenCain: "شهروند کین",
             simpleCitizen: "شهروند ساده",
-            clickToReveal: "برای نمایش نقش کلیک کنید",
             revealRole: "نمایش نقش",
             gotIt: "متوجه شدم!",
             startGame: "شروع بازی",
@@ -170,14 +168,15 @@ document.addEventListener("DOMContentLoaded", function() {
         roleForm.classList.add("d-none");
         roleRevealSection.classList.remove("d-none");
         godSection.classList.add("d-none");
-        revealedRole.textContent = "";
+        revealedRole.src = "img/startup.jpg";
         gotItButton.classList.add("d-none");
     });
 
     revealRoleButton.addEventListener("click", function() {
         if (currentPlayer < selectedRoles.length) {
             const role = selectedRoles[currentPlayer];
-            revealedRole.textContent = role;
+            console.log(role.key, role.name);
+            revealedRole.src = `img/roleCards/${role.key}.jpg`;
             revealRoleButton.classList.add("d-none");
             gotItButton.classList.remove("d-none");
             currentPlayer++;
@@ -185,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     gotItButton.addEventListener("click", function() {
-        revealedRole.textContent = "";
+        revealedRole.src = "img/startup.jpg"
         gotItButton.classList.add("d-none");
         
         if (currentPlayer === selectedRoles.length) {
@@ -208,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
         selectedRoles.forEach((role, index) => {
             const listItem = document.createElement("li");
             listItem.className = "list-group-item";
-            listItem.textContent = `${index + 1}. ${role}`;
+            listItem.textContent = `${index + 1}. ${role.name}`;
             allRolesList.appendChild(listItem);
         });
     }
@@ -249,7 +248,11 @@ document.addEventListener("DOMContentLoaded", function() {
             ...expandRoles(civilianRoles)
         ];
 
-        return expandedRoles.map(roleKey => getTranslation(roleKey));
+        return expandedRoles.map(roleKey => ({
+            key: roleKey,
+            name: getTranslation(roleKey)
+        }));
+    
     }
 
     function expandRoles(roles) {
