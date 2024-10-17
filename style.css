@@ -32,15 +32,19 @@ h1, h3 {
   width: 40px;
 }
 
-#startGame, #revealRoleButton, #gotItButton, #toggleLanguage, #godButton {
+#startGame, #revealRoleButton, #gotItButton, #toggleLanguage {
   font-size: 38px;
+}
+
+#godButton {
+  font-size: 28px;
 }
 
 #revealedRole {
   font-size: 72px;
   font-weight: bold;
-  color: #dc3545;
-  margin-top: 20px;
+  background-color: black;
+  padding: 0.5rem;
 }
 
 #allRolesList {

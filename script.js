@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const toggleLanguageButton = document.getElementById("toggleLanguage");
     const roleForm = document.getElementById("roleForm");
     const startGameButton = document.getElementById("startGame");
     const roleRevealSection = document.getElementById("roleRevealSection");
     const revealRoleButton = document.getElementById("revealRoleButton");
     const revealedRole = document.getElementById("revealedRole");
     const gotItButton = document.getElementById("gotItButton");
-    const toggleLanguageButton = document.getElementById("toggleLanguage");
+    const godButton = document.getElementById("godButton");
     const godSection = document.getElementById("godSection");
     const allRolesList = document.getElementById("allRolesList");
     const totalSelectedSpan = document.getElementById("totalSelected");
@@ -47,7 +48,8 @@ document.addEventListener("DOMContentLoaded", function() {
             gotIt: "Ok, got it!",
             startGame: "Start Game",
             totalPlayers: "Total Players:",
-            godView: "GOD View: Show All Roles",
+            godView: "Show God View",
+            allRevealedRoles: "All Revealed Roles",
             faLabel: "فا",
             enLabel: "EN",
             finalMoves: "Final Moves",
@@ -90,7 +92,8 @@ document.addEventListener("DOMContentLoaded", function() {
             gotIt: "متوجه شدم!",
             startGame: "شروع بازی",
             totalPlayers: "تعداد بازیکنان:",
-            godView: "نمایش تمامی نقش‌ها",
+            godView: "نمایش نتیجه برای استاد بهار",
+            allRevealedRoles: 'نقش‌ها به ترتیب',
             faLabel: "فا",
             enLabel: "EN",
             finalMoves: "حرکات نهایی",
@@ -188,18 +191,13 @@ document.addEventListener("DOMContentLoaded", function() {
         gotItButton.classList.add("d-none");
         
         if (currentPlayer === selectedRoles.length) {
-            const godButton = document.createElement("button");
-            godButton.id = "godButton";
-            godButton.className = "btn btn-info w-100 mt-3";
-            godButton.textContent = translations[currentLanguage]['godView'];
-            godButton.addEventListener("click", showGodView);
-            roleRevealSection.appendChild(godButton);
+            godButton.classList.remove("d-none");
         } else {
             revealRoleButton.classList.remove("d-none");
         }
     });
 
-    function showGodView() {
+    godButton.addEventListener("click", function() {
         godSection.classList.remove("d-none");
         roleRevealSection.classList.add("d-none");
 
@@ -210,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function() {
             listItem.textContent = `${index + 1}. ${role.name}`;
             allRolesList.appendChild(listItem);
         });
-    }
+    });
 
     function getRoles() {
         const mafiaRoles = [
