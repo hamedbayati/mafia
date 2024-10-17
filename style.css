@@ -24,9 +24,8 @@ h1, h3 {
   display: block;
 }
 
-#simpleMafia,
 #simpleCitizen {
-  width: 80px;
+  width: 50px;
 }
 
 #startGame, #revealRoleButton, #gotItButton, #toggleLanguage, #godButton {

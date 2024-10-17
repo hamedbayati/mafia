@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
             revealRole: "Reveal Role",
             gotIt: "Ok, got it!",
             startGame: "Start Game",
-            totalPlayers: "Total Players",
+            totalPlayers: "Total Players:",
             godView: "GOD View: Show All Roles",
             faLabel: "فا",
             enLabel: "EN"
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
             revealRole: "نمایش نقش",
             gotIt: "متوجه شدم!",
             startGame: "شروع بازی",
-            totalPlayers: "تعداد بازیکنان",
+            totalPlayers: "تعداد بازیکنان:",
             godView: "نمایش تمامی نقش‌ها",
             faLabel: "فا",
             enLabel: "EN"
@@ -120,14 +120,12 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listeners for role selection to update total selected
     const roleCheckboxes = document.querySelectorAll('.role-checkbox');
     const simpleCitizenInput = document.getElementById('simpleCitizen');
-    const simpleMafiaInput = document.getElementById('simpleMafia');
 
     roleCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', updateTotalSelected);
     });
 
     simpleCitizenInput.addEventListener('input', updateTotalSelected);
-    simpleMafiaInput.addEventListener('input', updateTotalSelected);
 
     function updateTotalSelected() {
         let total = 0;
@@ -139,9 +137,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         const simpleCitizenCount = parseInt(simpleCitizenInput.value) || 0;
-        const simpleMafiaCount = parseInt(simpleMafiaInput.value) || 0;
 
-        total += simpleCitizenCount + simpleMafiaCount;
+        total += simpleCitizenCount;
 
         totalSelectedSpan.textContent = total;
     }
@@ -205,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { key: "matador", count: document.getElementById("matador").checked ? 1 : 0 },
             { key: "drLecter", count: document.getElementById("drLecter").checked ? 1 : 0 },
             { key: "spy", count: document.getElementById("spy").checked ? 1 : 0 },
-            { key: "simpleMafia", count: parseInt(document.getElementById("simpleMafia").value) || 0 }
+            { key: "simpleMafia", count: document.getElementById("spy").checked ? 1 : 0 }
         ];
 
         const independentRoles = [
