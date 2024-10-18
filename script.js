@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { key: "matador", count: document.getElementById("matador").checked ? 1 : 0 },
             { key: "drLecter", count: document.getElementById("drLecter").checked ? 1 : 0 },
             { key: "spy", count: document.getElementById("spy").checked ? 1 : 0 },
-            { key: "simpleMafia", count: document.getElementById("spy").checked ? 1 : 0 }
+            { key: "simpleMafia", count: document.getElementById("simpleMafia").checked ? 1 : 0 }
         ];
 
         const independentRoles = [
