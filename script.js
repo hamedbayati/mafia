@@ -177,9 +177,9 @@ document.addEventListener("DOMContentLoaded", function() {
         roleCheckboxes.forEach(checkbox => {
             if (checkbox.checked) {
                 total += 1;
-                checkbox.dataset.cat === 'mafia' ? mafiaTotal += 1 : null;
-                checkbox.dataset.cat === 'independent' ? independentTotal += 1 : null;
-                checkbox.dataset.cat === 'civilian' ? civilianTotal += 1 : null;
+                checkbox.dataset.side === 'mafia' ? mafiaTotal += 1 : null;
+                checkbox.dataset.side === 'independent' ? independentTotal += 1 : null;
+                checkbox.dataset.side === 'civilian' ? civilianTotal += 1 : null;
             }
         });
 
@@ -194,43 +194,36 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function getRoles() {
-        const mafiaRoles = [
-            { key: "godfather", count: document.getElementById("godfather").checked ? 1 : 0 },
-            { key: "saulGoodman", count: document.getElementById("saulGoodman").checked ? 1 : 0 },
-            { key: "matador", count: document.getElementById("matador").checked ? 1 : 0 },
-            { key: "drLecter", count: document.getElementById("drLecter").checked ? 1 : 0 },
-            { key: "spy", count: document.getElementById("spy").checked ? 1 : 0 },
-            { key: "simpleMafia", count: document.getElementById("simpleMafia").checked ? 1 : 0 }
+        const roles = [
+            { side: 'mafia', key: "godfather", count: document.getElementById("godfather").checked ? 1 : 0 },
+            { side: 'mafia', key: "saulGoodman", count: document.getElementById("saulGoodman").checked ? 1 : 0 },
+            { side: 'mafia', key: "matador", count: document.getElementById("matador").checked ? 1 : 0 },
+            { side: 'mafia', key: "drLecter", count: document.getElementById("drLecter").checked ? 1 : 0 },
+            { side: 'mafia', key: "spy", count: document.getElementById("spy").checked ? 1 : 0 },
+            { side: 'mafia', key: "simpleMafia", count: document.getElementById("simpleMafia").checked ? 1 : 0 },
+            { side: 'independent', key: "zodiac", count: document.getElementById("zodiac").checked ? 1 : 0 },
+            { side: 'independent', key: "sherlock", count: document.getElementById("sherlock").checked ? 1 : 0 },
+            { side: 'independent', key: "nostradamus", count: document.getElementById("nostradamus").checked ? 1 : 0 },
+            { side: 'independent', key: "jackSparrow", count: document.getElementById("jackSparrow").checked ? 1 : 0 },
+            { side: 'civilian', key: "drWatson", count: document.getElementById("drWatson").checked ? 1 : 0 },
+            { side: 'civilian', key: "leon", count: document.getElementById("leon").checked ? 1 : 0 },
+            { side: 'civilian', key: "detective", count: document.getElementById("detective").checked ? 1 : 0 },
+            { side: 'civilian', key: "ocean", count: document.getElementById("ocean").checked ? 1 : 0 },
+            { side: 'civilian', key: "bodyguard", count: document.getElementById("bodyguard").checked ? 1 : 0 },
+            { side: 'civilian', key: "gunslinger", count: document.getElementById("gunslinger").checked ? 1 : 0 },
+            { side: 'civilian', key: "citizenCain", count: document.getElementById("citizenCain").checked ? 1 : 0 },
+            { side: 'civilian', key: "mayor", count: document.getElementById("mayor").checked ? 1 : 0 },
+            { side: 'civilian', key: "governor", count: document.getElementById("governor").checked ? 1 : 0 },
+            { side: 'civilian', key: "constantine", count: document.getElementById("constantine").checked ? 1 : 0 },
+            { side: 'civilian', key: "blacksmith", count: document.getElementById("blacksmith").checked ? 1 : 0 },
+            { side: 'civilian', key: "simpleCitizen", count: parseInt(document.getElementById("simpleCitizen").value) || 0 }
         ];
 
-        const independentRoles = [
-            { key: "zodiac", count: document.getElementById("zodiac").checked ? 1 : 0 },
-            { key: "sherlock", count: document.getElementById("sherlock").checked ? 1 : 0 }
-        ];
-
-        const civilianRoles = [
-            { key: "drWatson", count: document.getElementById("drWatson").checked ? 1 : 0 },
-            { key: "leon", count: document.getElementById("leon").checked ? 1 : 0 },
-            { key: "detective", count: document.getElementById("detective").checked ? 1 : 0 },
-            { key: "ocean", count: document.getElementById("ocean").checked ? 1 : 0 },
-            { key: "bodyguard", count: document.getElementById("bodyguard").checked ? 1 : 0 },
-            { key: "gunslinger", count: document.getElementById("gunslinger").checked ? 1 : 0 },
-            { key: "citizenCain", count: document.getElementById("citizenCain").checked ? 1 : 0 },
-            { key: "mayor", count: document.getElementById("mayor").checked ? 1 : 0 },
-            { key: "governor", count: document.getElementById("governor").checked ? 1 : 0 },
-            { key: "constantine", count: document.getElementById("constantine").checked ? 1 : 0 },
-            { key: "blacksmith", count: document.getElementById("blacksmith").checked ? 1 : 0 },
-            { key: "simpleCitizen", count: parseInt(document.getElementById("simpleCitizen").value) || 0 }
-        ];
-
-        const expandedRoles = [
-            ...expand(mafiaRoles),
-            ...expand(independentRoles),
-            ...expand(civilianRoles)
-        ];
+        const expandedRoles = expand(roles);
 
         return expandedRoles.map(roleKey => ({
             key: roleKey,
+            side: roles.find(role => role.key === roleKey).side,
             name: getTranslation(roleKey)
         }));
     }
@@ -316,10 +309,18 @@ document.addEventListener("DOMContentLoaded", function() {
     godButton.addEventListener("click", function() {
         allRolesList.innerHTML = "";
         shuffledRoles.forEach((role, index) => {
+            console.log(role.key, role.name, role.side);
             const listItem = document.createElement("li");
             listItem.className = "list-group-item";
+            if (role.side === 'mafia') {
+                listItem.classList.add("list-group-item-danger");
+            }
+            if (role.side === 'independent') {
+                listItem.classList.add("list-group-item-warning");
+            }
+            
             listItem.dataset.key = role.key;
-            listItem.textContent = `${index + 1}. ${role.name}`;
+            listItem.textContent = `${role.name}`;
 
             listItem.addEventListener("click", function() {
                 const selectedRoleImg = document.getElementById("selectedRole");
