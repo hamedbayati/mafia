@@ -61,7 +61,8 @@ document.addEventListener("DOMContentLoaded", function() {
             gotIt: "Ok, got it!",
             startGame: "Start Game",
             players: "Players",
-            godView: "Show God View",
+            showGodView: "Show God View",
+            godViewPanel: "God Panel",
             allRevealedRoles: "All Revealed Roles",
             faLabel: "فارسی",
             enLabel: "English",
@@ -107,7 +108,8 @@ document.addEventListener("DOMContentLoaded", function() {
             gotIt: "متوجه شدم!",
             startGame: "شروع بازی",
             players: "نفره",
-            godView: "نمایش نتیجه برای استاد بهار",
+            showGodView: "نمایش نتیجه برای استاد بهار",
+            godViewPanel: "پنل استاد بهار",
             allRevealedRoles: 'نقش‌ها',
             faLabel: "فارسی",
             enLabel: "English",
@@ -408,7 +410,7 @@ document.addEventListener("DOMContentLoaded", function() {
         finalMovesList.innerHTML = "";
         finalMoves.forEach((finalMove, index) => {
             const listItem = document.createElement("li");
-            listItem.className = "list-group-item";
+            listItem.className = "list-group-item text-center";
 
             if (!finalMove.available) {
                 listItem.classList.add("list-group-item-secondary");
