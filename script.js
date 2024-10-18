@@ -310,11 +310,11 @@ document.addEventListener("DOMContentLoaded", function() {
             listItem.setAttribute("data-bs-target", "#selectedRoleModal");
             listItem.textContent = `${index + 1}. ${role.name}`;
 
-            listItem.addEventListener("click", function() {
-                const selectedRoleImg = document.getElementById("selectedRole");
-                const roleKey = listItem.dataset.key;
-                selectedRoleImg.src = `img/roleCards/${roleKey}.jpg`;
-            });
+            // listItem.addEventListener("click", function() {
+            //     const selectedRoleImg = document.getElementById("selectedRole");
+            //     const roleKey = listItem.dataset.key;
+            //     selectedRoleImg.src = `img/roleCards/${roleKey}.jpg`;
+            // });
     
             allRolesList.appendChild(listItem);
         });
