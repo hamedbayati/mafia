@@ -193,6 +193,20 @@ document.addEventListener("DOMContentLoaded", function() {
         totalSelectedCivilian.textContent = civilianTotal;
     }
 
+    // Event listeners for final moves selection to update total selected
+    const finalMoveCheckboxes = document.querySelectorAll('.final-move-checkbox');
+    const totalSelectedFinalMoves = document.getElementById("totalSelectedFinalMoves");
+
+    finalMoveCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            let total = 0;
+            finalMoveCheckboxes.forEach(checkbox => {
+                total += checkbox.checked ? 1 : 0;
+            });
+            totalSelectedFinalMoves.textContent = total;
+        });
+    });
+
     function getRoles() {
         const roles = [
             { side: 'mafia', key: "godfather", count: document.getElementById("godfather").checked ? 1 : 0 },
@@ -318,7 +332,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (role.side === 'independent') {
                 listItem.classList.add("list-group-item-warning");
             }
-            
+
             listItem.dataset.key = role.key;
             listItem.textContent = `${role.name}`;
 
