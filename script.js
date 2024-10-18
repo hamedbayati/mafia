@@ -340,8 +340,15 @@ document.addEventListener("DOMContentLoaded", function() {
         revealedFinalMoveResult.src = 'img/startup.jpg';
 
         shuffledFinalMoves.forEach((finalMove, index) => {
+            let colWidth =  4;
+            remainedCardsCount = shuffledFinalMoves.length;
+            if (remainedCardsCount === 1) {
+                colWidth = 12;
+            } else if (remainedCardsCount < 5) {
+                colWidth = 6;
+            }
             const colDiv = document.createElement('div');
-            colDiv.className = 'col-4';
+            colDiv.className = `col-${colWidth}`;
             const imgElement = document.createElement('img');
             imgElement.src = 'img/startup.jpg';
             imgElement.className = 'img-thumbnail mt-3';
@@ -360,11 +367,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
         godMainSection.classList.add("d-none");
         godFinalMoveSection.classList.remove("d-none");
-        revealedFinalMove.src = "img/startup.jpg";
     });
 
     godFinalMoveSectionCloseButton.addEventListener("click", function() {
         godFinalMoveSection.classList.add("d-none");
         godMainSection.classList.remove("d-none");
+        if (shuffledFinalMoves.length === 0) {
+            finalMoveButton.disabled = true;
+            finalMoveButton.classList.add("btn-outline-info");
+            finalMoveButton.classList.remove("btn-info");
+        }
     });
 });
