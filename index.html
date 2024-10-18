@@ -129,7 +129,7 @@
 
             <!-- Last Moves Cards -->
             <div class="row mb-4">
-                <h3 class="col-12"><span data-i18n="finalMoves">Final Moves</span><span class="px-2" id="totalSelectedFinalMoves">6</span></h3>
+                <h3 class="col-12"><span data-i18n="finalMoves">Final Moves</span><span class="px-2" id="totalSelectedFinalMoves">7</span></h3>
 
                 <div class="col-6 form-check">
                     <input class="form-check-input final-move-checkbox" type="checkbox" value="beautifulMind" id="beautifulMind" checked>
@@ -156,7 +156,7 @@
                     <label class="form-check-label" for="handcuffs" data-i18n="handcuffs">Handcuffs</label>
                 </div>
                 <div class="col-6 form-check">
-                    <input class="form-check-input final-move-checkbox" type="checkbox" value="silenceOfTheLambs" id="silenceOfTheLambs">
+                    <input class="form-check-input final-move-checkbox" type="checkbox" value="silenceOfTheLambs" id="silenceOfTheLambs" checked>
                     <label class="form-check-label" for="silenceOfTheLambs" data-i18n="silenceOfTheLambs">Silence of the Lambs</label>
                 </div>
                 <div class="col-6 form-check">
@@ -185,7 +185,10 @@
         <div id="godSection" class="d-none">
             <div id="godMainSection" class="mt-5 d-none">
                 <button id="allRolesListButton" class="btn btn-info btn-lg w-100 mb-4" data-i18n="allRevealedRoles">All Revealed Roles</button>
-                <button id="finalMoveButton" class="btn btn-info btn-lg w-100" data-i18n="finalMove">Final Move</button>
+                <button id="finalMoveButton" class="btn btn-info btn-lg w-100 mb-4" data-i18n="revealFinalMove">Reveal Final Move</button>
+
+                <h3 class="text-start" data-i18n="finalMoves">Final Moves:</h3>
+                <ol id="finalMovesList" class="list-group list-group-numbered"></ol>
             </div>
             <div id="godRolesSection" class="mt-5 d-none">
                 <div class="d-flex justify-content-between">

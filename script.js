@@ -17,12 +17,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const allRolesList = document.getElementById("allRolesList");
     const revealedFinalMovesList = document.getElementById("revealedFinalMovesList");
     const revealedFinalMoveResult = document.getElementById("revealedFinalMoveResult");
+    const finalMovesList = document.getElementById("finalMovesList");
 
     const selectedRoleModal = new bootstrap.Modal(document.getElementById("selectedRoleModal"));
 
     let currentPlayer = 0;
     let shuffledRoles = [];
 
+    let finalMoves = [];
     let shuffledFinalMoves = [];
 
     let currentLanguage = 'fa';
@@ -130,14 +132,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     toggleLanguageButton.addEventListener("click", function(event) {
         event.preventDefault();
-        console.log('Toggling language, currentLanguage is ', currentLanguage);
         currentLanguage = currentLanguage === 'en' ? 'fa' : 'en';
 
         setLanguage(currentLanguage);
     });
 
     function setLanguage(lang) {
-        console.log('Setting language to', lang);
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
         document.body.setAttribute('data-lang', lang);
@@ -258,7 +258,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         return expandedFinalMoves.map(moveKey => ({
             key: moveKey,
-            name: getTranslation(moveKey)
+            name: getTranslation(moveKey),
+            available: true
         }));
     }
 
@@ -287,7 +288,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listeners for buttons
     startGameButton.addEventListener("click", function() {
         shuffledRoles = shuffle(getRoles());
+
+        finalMoves = getFinalMoves();
         shuffledFinalMoves = shuffle(getFinalMoves());
+        updateFinalMoveList();
 
         currentPlayer = 0;
 
@@ -301,7 +305,6 @@ document.addEventListener("DOMContentLoaded", function() {
     revealRoleButton.addEventListener("click", function() {
         if (currentPlayer < shuffledRoles.length) {
             const role = shuffledRoles[currentPlayer];
-            console.log(role.key, role.name);
             revealedRole.src = `img/roleCards/${role.key}.jpg`;
             revealRoleButton.classList.add("d-none");
             gotItButton.classList.remove("d-none");
@@ -323,7 +326,6 @@ document.addEventListener("DOMContentLoaded", function() {
     godButton.addEventListener("click", function() {
         allRolesList.innerHTML = "";
         shuffledRoles.forEach((role, index) => {
-            console.log(role.key, role.name, role.side);
             const listItem = document.createElement("li");
             listItem.className = "list-group-item";
             if (role.side === 'mafia') {
@@ -367,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         shuffledFinalMoves.forEach((finalMove, index) => {
             let colWidth =  4;
-            remainedCardsCount = shuffledFinalMoves.length;
+            const remainedCardsCount = shuffledFinalMoves.length;
             if (remainedCardsCount === 1) {
                 colWidth = 12;
             } else if (remainedCardsCount < 5) {
@@ -384,6 +386,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 shuffledFinalMoves = shuffledFinalMoves.filter(move => move.key !== finalMove.key);
                 revealedFinalMovesList.innerHTML = "";
                 revealedFinalMoveResult.classList.remove("d-none");
+
+                finalMoves = finalMoves.map(move => {
+                    if (move.key === finalMove.key) {
+                        move.available = false;
+                    }
+                    return move;
+                });
+
+                updateFinalMoveList();
             });
             
             colDiv.appendChild(imgElement);
@@ -394,6 +405,20 @@ document.addEventListener("DOMContentLoaded", function() {
         godMainSection.classList.add("d-none");
         godFinalMoveSection.classList.remove("d-none");
     });
+
+    const updateFinalMoveList = function() {
+        finalMovesList.innerHTML = "";
+        finalMoves.forEach((finalMove, index) => {
+            const listItem = document.createElement("li");
+            listItem.className = "list-group-item";
+
+            if (!finalMove.available) {
+                listItem.classList.add("list-group-item-secondary");
+            }
+            listItem.textContent = `${finalMove.name}`;
+            finalMovesList.appendChild(listItem);
+        });
+    }
 
     godFinalMoveSectionCloseButton.addEventListener("click", function() {
         godFinalMoveSection.classList.add("d-none");
