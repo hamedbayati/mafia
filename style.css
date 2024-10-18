@@ -32,17 +32,20 @@ h1, h3 {
   width: 40px;
 }
 
-#startGame, #revealRoleButton, #gotItButton, #toggleLanguage, #allRolesListButton, #finalMoveButton {
-  font-size: 38px;
-}
-
+#startGame,
+#revealRoleButton,
+#gotItButton,
+#toggleLanguage,
+#allRolesListButton,
+#finalMoveButton,
 #godButton {
   font-size: 28px;
 }
 
 #revealedRole,
 #revealedFinalMove,
-#selectedRole {
+#selectedRole,
+#revealedFinalMoveResult {
   font-size: 72px;
   font-weight: bold;
   background-color: black;
@@ -53,10 +56,6 @@ h1, h3 {
   font-size: 18px;
 }
 
-#toggleLanguage {
-  font-size: 12px;
-}
-
 #godRolesSectionCloseButton,
 #godFinalMoveSectionCloseButton {
   height: 30px;
@@ -64,4 +63,7 @@ h1, h3 {
 
 .modal-backdrop.show {
   opacity: 0.95;
+}
+.modal-content {
+  background-color: #000000;
 }

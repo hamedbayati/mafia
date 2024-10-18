@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const godRolesSectionCloseButton = document.getElementById("godRolesSectionCloseButton");
     const godFinalMoveSection = document.getElementById("godFinalMoveSection");
     const allRolesList = document.getElementById("allRolesList");
-    const totalSelectedSpan = document.getElementById("totalSelected");
     const revealedFinalMovesList = document.getElementById("revealedFinalMovesList");
     const revealedFinalMoveResult = document.getElementById("revealedFinalMoveResult");
 
@@ -24,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentPlayer = 0;
     let shuffledRoles = [];
 
-    let currentBenchedPlayer = 0;
     let shuffledFinalMoves = [];
 
     let currentLanguage = 'fa';
@@ -60,11 +58,11 @@ document.addEventListener("DOMContentLoaded", function() {
             revealRole: "Reveal Role",
             gotIt: "Ok, got it!",
             startGame: "Start Game",
-            totalPlayers: "Total Players:",
+            players: "Players",
             godView: "Show God View",
             allRevealedRoles: "All Revealed Roles",
-            faLabel: "فا",
-            enLabel: "EN",
+            faLabel: "فارسی",
+            enLabel: "English",
             finalMoves: "Final Moves",
             beautifulMind: "Beautiful Mind",
             finalShot: "Final Shot",
@@ -107,11 +105,11 @@ document.addEventListener("DOMContentLoaded", function() {
             revealRole: "نمایش نقش",
             gotIt: "متوجه شدم!",
             startGame: "شروع بازی",
-            totalPlayers: "تعداد بازیکنان:",
+            players: "نفره",
             godView: "نمایش نتیجه برای استاد بهار",
             allRevealedRoles: 'نقش‌ها',
-            faLabel: "فا",
-            enLabel: "EN",
+            faLabel: "فارسی",
+            enLabel: "English",
             finalMoves: "کارت‌های خروج",
             beautifulMind: "ذهن زیبا",
             finalShot: "شلیک نهایی",
@@ -130,20 +128,22 @@ document.addEventListener("DOMContentLoaded", function() {
     // Initialize Language
     setLanguage(currentLanguage);
 
-    // Language Toggle Event
-    toggleLanguageButton.addEventListener("click", function() {
+    toggleLanguageButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        console.log('Toggling language, currentLanguage is ', currentLanguage);
         currentLanguage = currentLanguage === 'en' ? 'fa' : 'en';
+
         setLanguage(currentLanguage);
     });
 
     function setLanguage(lang) {
+        console.log('Setting language to', lang);
         document.documentElement.lang = lang;
         document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
         document.body.setAttribute('data-lang', lang);
         document.getElementById('bootstrap-ltr').disabled = lang === 'fa';
         document.getElementById('bootstrap-rtl').disabled = lang === 'en';
 
-        // Update text based on translations
         document.querySelectorAll('[data-i18n]').forEach(function(element) {
             const key = element.getAttribute('data-i18n');
             if (translations[lang][key]) {
@@ -151,13 +151,16 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        // Update language toggle button text
         toggleLanguageButton.textContent = lang === 'en' ? translations['fa']['faLabel'] : translations['en']['enLabel'];
     }
 
     // Event listeners for role selection to update total selected
     const roleCheckboxes = document.querySelectorAll('.role-checkbox');
     const simpleCitizenInput = document.getElementById('simpleCitizen');
+    const totalSelectedSpan = document.getElementById("totalSelected");
+    const totalSelectedMafia = document.getElementById("totalSelectedMafia");
+    const totalSelectedIndependent = document.getElementById("totalSelectedIndependent");
+    const totalSelectedCivilian = document.getElementById("totalSelectedCivilian");
 
     roleCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', updateTotalSelected);
@@ -167,18 +170,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function updateTotalSelected() {
         let total = 0;
+        let mafiaTotal = 0;
+        let independentTotal = 0;
+        let civilianTotal = 0;
 
         roleCheckboxes.forEach(checkbox => {
             if (checkbox.checked) {
                 total += 1;
+                checkbox.dataset.cat === 'mafia' ? mafiaTotal += 1 : null;
+                checkbox.dataset.cat === 'independent' ? independentTotal += 1 : null;
+                checkbox.dataset.cat === 'civilian' ? civilianTotal += 1 : null;
             }
         });
 
         const simpleCitizenCount = parseInt(simpleCitizenInput.value) || 0;
-
         total += simpleCitizenCount;
+        civilianTotal += simpleCitizenCount;
 
         totalSelectedSpan.textContent = total;
+        totalSelectedMafia.textContent = mafiaTotal;
+        totalSelectedIndependent.textContent = independentTotal;
+        totalSelectedCivilian.textContent = civilianTotal;
     }
 
     function getRoles() {
@@ -271,7 +283,6 @@ document.addEventListener("DOMContentLoaded", function() {
         shuffledFinalMoves = shuffle(getFinalMoves());
 
         currentPlayer = 0;
-        currentBenchedPlayer = 0;
 
         roleForm.classList.add("d-none");
         roleRevealSection.classList.remove("d-none");
