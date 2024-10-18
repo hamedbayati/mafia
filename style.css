@@ -41,7 +41,8 @@ h1, h3 {
 }
 
 #revealedRole,
-#revealedFinalMove {
+#revealedFinalMove,
+#selectedRole {
   font-size: 72px;
   font-weight: bold;
   background-color: black;
@@ -59,4 +60,8 @@ h1, h3 {
 #godRolesSectionCloseButton,
 #godFinalMoveSectionCloseButton {
   height: 30px;
+}
+
+.modal-backdrop.show {
+  opacity: 0.95;
 }

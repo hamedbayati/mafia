@@ -305,7 +305,17 @@ document.addEventListener("DOMContentLoaded", function() {
         shuffledRoles.forEach((role, index) => {
             const listItem = document.createElement("li");
             listItem.className = "list-group-item";
+            listItem.dataset.key = role.key;
+            listItem.setAttribute("data-bs-toggle", "modal");
+            listItem.setAttribute("data-bs-target", "#selectedRoleModal");
             listItem.textContent = `${index + 1}. ${role.name}`;
+
+            listItem.addEventListener("click", function() {
+                const selectedRoleImg = document.getElementById("selectedRole");
+                const roleKey = listItem.dataset.key;
+                selectedRoleImg.src = `img/roleCards/${roleKey}.jpg`;
+            });
+    
             allRolesList.appendChild(listItem);
         });
         roleRevealSection.classList.add("d-none");
