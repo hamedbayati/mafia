@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const godFinalMoveSection = document.getElementById("godFinalMoveSection");
     const allRolesList = document.getElementById("allRolesList");
     const totalSelectedSpan = document.getElementById("totalSelected");
-    const revealFinalMoveButton = document.getElementById("revealFinalMoveButton");
-    const revealedFinalMove = document.getElementById("revealedFinalMove");
+    const revealedFinalMovesList = document.getElementById("revealedFinalMovesList");
+    const revealedFinalMoveResult = document.getElementById("revealedFinalMoveResult");
 
     const selectedRoleModal = new bootstrap.Modal(document.getElementById("selectedRoleModal"));
 
@@ -335,24 +335,36 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     finalMoveButton.addEventListener("click", function() {
+        revealedFinalMovesList.innerHTML = "";
+        revealedFinalMoveResult.classList.add("d-none");
+        revealedFinalMoveResult.src = 'img/startup.jpg';
+
+        shuffledFinalMoves.forEach((finalMove, index) => {
+            const colDiv = document.createElement('div');
+            colDiv.className = 'col-4';
+            const imgElement = document.createElement('img');
+            imgElement.src = 'img/startup.jpg';
+            imgElement.className = 'img-thumbnail mt-3';
+            
+            imgElement.addEventListener("click", function() {
+                revealedFinalMoveResult.src = `img/finalMoveCards/${finalMove.key}.jpg`;
+                shuffledFinalMoves = shuffledFinalMoves.filter(move => move.key !== finalMove.key);
+                revealedFinalMovesList.innerHTML = "";
+                revealedFinalMoveResult.classList.remove("d-none");
+            });
+            
+            colDiv.appendChild(imgElement);
+            revealedFinalMovesList.appendChild(colDiv);
+        });
+
+
         godMainSection.classList.add("d-none");
         godFinalMoveSection.classList.remove("d-none");
         revealedFinalMove.src = "img/startup.jpg";
-        revealFinalMoveButton.classList.remove("d-none");
     });
 
     godFinalMoveSectionCloseButton.addEventListener("click", function() {
         godFinalMoveSection.classList.add("d-none");
         godMainSection.classList.remove("d-none");
-    });
-
-    revealFinalMoveButton.addEventListener("click", function() {
-        if (currentBenchedPlayer < shuffledFinalMoves.length) {
-            const finalMove = shuffledFinalMoves[currentBenchedPlayer];
-            revealedFinalMove.src = `img/finalMoveCards/${finalMove.key}.jpg`;
-            revealFinalMoveButton.classList.add("d-none");
-            gotItButton.classList.remove("d-none");
-            currentBenchedPlayer++;
-        }
     });
 });
