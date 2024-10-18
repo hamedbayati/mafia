@@ -74,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function() {
             handcuffs: "Handcuffs",
             silenceOfTheLambs: "Silence of the Lambs",
             greenMile: "The Green Mile",
-            finalMove: "Final Move",
             closeButton: "Close",
             revealFinalMove: "Reveal Final Move"
         },
@@ -121,9 +120,8 @@ document.addEventListener("DOMContentLoaded", function() {
             handcuffs: "دستبند",
             silenceOfTheLambs: "سکوت بره‌ها",
             greenMile: "مسیر سبز",
-            finalMove: "کارت‌ خروج",
             closeButton: "بستن",
-            revealFinalMove: "نمایش کارت خروج"
+            revealFinalMove: "انتخاب کارت خروج"
         }
     };
 
